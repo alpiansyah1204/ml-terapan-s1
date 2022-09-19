@@ -93,11 +93,13 @@ setelah data outlier dibersihkan
 ## Data Preparation
 Sebelum datasetnya di latih atau training, dari model sebelumnya perlu melakukan encoding lalu pemisahan data antara data latih dan test setelah itu melakukan scaling untuk data categorical agar data dapat dilatih.
 
-#### Train-Test Split
-Proses splitting data atau pembagian dataset menjadi data latih (train) dan data uji (test) merupakan hal yang harus dilakukan sebelum melakukan pemodelan supervised. Hal ini karena data uji berperan sebagai data baru yang benar-benar belum pernah dilihat oleh model sebelumnya sehingga informasi yang terdapat pada data uji tidak mengotori informasi yang terdapat pada data latih, alasan lain mengapa menggunakan train test split karena untuk efisiensi dan tidak melakukan data leakage ketika melakukan scaling. pada proyek kali ini kita membagi data menjadi 80:20 dengan random state = 93 
 
 #### Standardisasi 
 Data numerik yang terdapat di dataset perlu dilakukannya proses Standardisasi sehingga menghasilkan distribusi dengan nilai standar deviasi 1 dan mean 0. Hal tersebut dilakukan dengan tujuan untuk meningkatkan peforma algoritma machine learning dan membuatnya konvergen lebih cepat selain itu menghindari overfitting dan juga data imbalance. pada proyek kali ini saya menggunakan fungsi MaxAbsScaler(). fungsi ini berguna untuk melakukan standarisasi pada data. 
+
+#### Train-Test Split
+Proses splitting data atau pembagian dataset menjadi data latih (train) dan data uji (test) merupakan hal yang harus dilakukan sebelum melakukan pemodelan supervised. Hal ini karena data uji berperan sebagai data baru yang benar-benar belum pernah dilihat oleh model sebelumnya sehingga informasi yang terdapat pada data uji tidak mengotori informasi yang terdapat pada data latih, alasan lain mengapa menggunakan train test split karena untuk efisiensi dan tidak melakukan data leakage ketika melakukan scaling. pada proyek kali ini kita membagi data menjadi 80:20 dengan random state = 93 
+
 
 ## Modeling
 
@@ -105,8 +107,25 @@ pada proyek yang dibuat kali ini, digunakan model algoritma mechine learning yai
 
 - pada LogisticRegression kita hanya menggunakan fungsi fit tanpa tambahan parameterlain 
 `logisticRegressionModel = LogisticRegression().fit(X_train, y_train)`
+  - kelebihan pada algoritma ini yaitu Output memiliki interpretasi probabilistik yang bagus, dan algoritme dapat diatur untuk menghindari overfitting. Model logistik dapat diperbarui dengan mudah dengan data baru menggunakan penurunan gradien stokastik.
+dari algoritma diatas pada saat proses modeling dan evaluasi semua algoritma yang digunakan bekerja dengan cukup baik dalam hal memprediksi diabetes. hal ini dapat ditunjukan nilai akurasi, MSE, dan RMSE pada saat training dan testing. namun pada akhirnya score yang paling tinggi yaitu ketika menggunakan algoritma RandomForestClassifier 
+  - kekurangan Regresi logistik cenderung berperforma buruk bila ada beberapa atau tidak linier batas keputusan. Mereka tidak cukup fleksibel untuk menangkap lebih kompleks secara alami
 
-dari algoritma diatas pada saat proses modeling dan evaluasi semua algoritma yang digunakan bekerja dengan cukup baik dalam hal memprediksi diabetes. hal ini dapat ditunjukan nilai akurasi, MSE, dan RMSE pada saat training dan testing. namun pada akhirnya score yang paling tinggi yaitu ketika menggunakan algoritma RandomForestClassifier
+- pada DecisionTreeClassifier pada proyek ini menggunakan parameter tambahan yaitu min_samples_split.  min sample split sendiri yaitu jumlah minimum sampel yang diperlukan untuk membagi simpul internal dan code yang ada didalam proyek yaitu `treeModel = DecisionTreeClassifier(min_samples_split = 60).fit(X_train, y_train)`
+  - kelebihan dari algoritma ini yaitu menghasilkan aturan yang dapat dimengerti, dapat melakukan klasifikasi tanpa memerlukan banyak perhitungan, mampu menangani variabel kontinu dan kategorikal, dapat memberikan indikasi yang jelas tentang bidang mana yang paling penting untuk prediksi atau klasifikasi.
+  - kekurangan kurang tepat untuk tugas estimasi di mana tujuannya adalah untuk memprediksi nilai atribut kontinu, rentan terhadap kesalahan dalam masalah klasifikasi dengan banyak kelas dan jumlah contoh pelatihan yang relatif kecil, membutuhkan pekerjaan komputasi yang ekstensif. Setiap bidang pemisahan potensial pada setiap node perlu diurutkan sebelum pemisahan idealnya dapat ditentukan. Beberapa algoritma menggunakan kombinasi bidang, oleh karena itu perlu untuk mencari bobot kombinasi terbaik. Karena banyak kandidat sub-pohon harus dibuat dan dievaluasi, algoritma pemangkasan juga bisa mahal.
+
+- pada algoritma RandomForestClassifier sama seperti DecisionTreeClassifier menggunakan parameter tambahan yaitu min_samples_split. tujuanya untuk memberikan nilai umlah minimum sampel yang diperlukan untuk membagi simpul internal. pengaplikasianya dalam proyek kali ini yaitu `forestModel = RandomForestClassifier(min_samples_split = 60).fit(X_train, y_train)` 
+  - kelebihanya random forest berdasarkan algoritma bagging dan menggunakan teknik Ensemble Learning. Ini menciptakan sebanyak mungkin pohon pada subset data dan menggabungkan output dari semua pohon. Dengan cara ini mengurangi masalah overfitting di pohon keputusan dan juga mengurangi varians dan karena itu meningkatkan akurasi, dapat digunakan untuk menyelesaikan masalah klasifikasi maupun regresi, dengan baik dengan variabel kategorikal dan kontinu, dapat secara otomatis menangani nilai yang hilang, Tidak diperlukan penskalaan fitur (standarisasi dan normalisasi) dalam kasus Hutan Acak karena menggunakan pendekatan berbasis aturan alih-alih perhitungan jarak.
+  - kekuranganya menciptakan banyak pohon (tidak seperti hanya satu pohon dalam kasus pohon keputusan) dan menggabungkan hasilnya. Secara default, ini membuat 100 pohon di pustaka sklearn Python. Untuk melakukannya, algoritma ini membutuhkan lebih banyak daya dan sumber daya komputasi. Di sisi lain pohon keputusan sederhana dan tidak memerlukan begitu banyak sumber daya komputasi, membutuhkan lebih banyak waktu untuk berlatih dibandingkan dengan pohon keputusan karena menghasilkan banyak pohon (bukan satu pohon dalam kasus pohon keputusan) dan membuat keputusan berdasarkan suara terbanyak.
+
+- pada algoritma GaussianNB dalam proyek kali ini tidak menambahkan paramater lain dan pengaplikasianya pada proyek kali ini yaitu  `bayesModel = GaussianNB().fit(X_train, y_train)` 
+  - kelebihan Algoritma ini bekerja dengan cepat dan dapat menghemat banyak waktu, Naive Bayes cocok untuk memecahkan masalah prediksi multi-kelas, Jika asumsi independensi fiturnya benar, ia dapat berkinerja lebih baik daripada model lain dan membutuhkan lebih sedikit data pelatihan, Naive Bayes lebih cocok untuk variabel input kategoris daripada variabel numerik.
+  - kekuranganya Naive Bayes mengasumsikan bahwa semua prediktor (atau fitur) adalah independen, jarang terjadi dalam kehidupan nyata. Ini membatasi penerapan algoritme ini dalam kasus penggunaan di dunia nyata, Algoritme ini menghadapi 'masalah frekuensi nol' di mana ia memberikan probabilitas nol untuk variabel kategoris yang kategorinya dalam kumpulan data uji tidak tersedia dalam kumpulan data pelatihan. Akan lebih baik jika Anda menggunakan teknik smoothing untuk mengatasi masalah ini, Estimasinya bisa salah dalam beberapa kasus, jadi Anda tidak boleh menganggap hasil probabilitasnya terlalu serius.
+
+dari model yang akan digunakan menurut saya RandomForestClassifier akan menghasilkan score yang terbaik karena kelebihan-kelebihan yang ada pada RandomForestClassifier sangat bagus digunakan pada data ini algoritma ini juga dapat mengurangi masalah overfitting yang dapat meningkatkan akurasi serta pendekatan yang ada pada model ini yaitu pendekatanya berbasis aturan.
+
+
 
 ## Evaluasi 
 |no|Model	|Score|mse|rmse|
