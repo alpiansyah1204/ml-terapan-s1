@@ -7,6 +7,8 @@ Original file is located at
     https://colab.research.google.com/drive/1Z1UBMg9SQaT7DhFFqN32IaEzpMvctOrk
 
 #Import Library
+
+melakukan import lib yang akan digunakan
 """
 
 import numpy as np
@@ -15,9 +17,14 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import zipfile
 
-"""#Import kaggle """
+"""#Import kaggle
+
+menginstall kaggle
+"""
 
 pip install -q kaggle
+
+"""mengunggah file json kaggle """
 
 from google.colab import files
 
@@ -28,25 +35,43 @@ files.upload()
 !chmod 600 ~/.kaggle/kaggle.json
 !ls ~/.kaggle
 
+"""mengunduh dataset diabetes"""
+
 !kaggle datasets download -d alexteboul/diabetes-health-indicators-dataset
+
+"""mengekstrak file zip yang telah diunduh"""
 
 local_zip = '/content/diabetes-health-indicators-dataset.zip'
 zip_ref = zipfile.ZipFile(local_zip, 'r')
 zip_ref.extractall('/content')
 zip_ref.close()
 
-"""#Import Dataset"""
+"""#Import Dataset
+
+import dataset kedalam variable
+"""
 
 df = pd.read_csv('/content/diabetes_binary_health_indicators_BRFSS2015.csv')
 df.head()
 
-"""#EXPLORATORY DATA ANALYSIS (EDA) & DATA CLEANING"""
+"""#EXPLORATORY DATA ANALYSIS (EDA) & DATA CLEANING
+
+melihat informasi type data pada column yang ada di dataset
+"""
 
 df.info()
 
+"""melihat informasi jumlah, rata-rata, Q1, Q2, Q3, minimal dan maksimal"""
+
 df.describe()
 
+"""menghitung jumlah nilai kosong pada setiap column"""
+
 df.isnull().sum()
+
+"""menghitung total value pada kolom Diabetes_binary
+
+"""
 
 df['Diabetes_binary'].value_counts()
 
@@ -56,18 +81,17 @@ plt.figure(figsize=(20, 15))
 sns.heatmap(data=df.corr(), annot=True, cmap='coolwarm')
 plt.title("Correlation Matrix")
 
+"""dari piechart didapatkan 86.07% tidak mengidap diabetes dan 13.93% mengidap diabetes"""
+
 plt.pie(df["Diabetes_binary"].value_counts(),labels = df["Diabetes_binary"].unique(),autopct = "%.2f%%",shadow=True,explode=(0,0.3),radius=1.5)
 plt.legend()
 plt.show()
 
-"""dari piechart didapatkan 86.07% tidak mengidap diabetes dan 13.93 mengidap diabetes
-
-Distribusi setiap variable yang ada di dalam dataset
-"""
+"""Distribusi setiap variable yang ada di dalam dataset"""
 
 df.hist(figsize=(16,12))
 
-"""disini saya menggunakan pairplot untuk melihat grafik mana yang memiliki kesamaan sehingga akan mempermudah untuk melakukan prediksi"""
+"""disini saya menggunakan pairplot untuk melihat grafik mana yang memiliki kesamaan sehingga akan mempermudah untuk melakukan prediksi """
 
 sns.pairplot(df,x_vars=['HighBP','HighChol','CholCheck','BMI','Smoker','Stroke'],y_vars=['Diabetes_binary'])
 
@@ -77,7 +101,7 @@ sns.pairplot(df,x_vars=['NoDocbcCost','GenHlth','MentHlth','PhysHlth','DiffWalk'
 
 sns.pairplot(df,x_vars=['Age','Education','Income'],y_vars=['Diabetes_binary'])
 
-"""Mengecek value setiap column apakah ada data outlier"""
+"""Mengecek value setiap column apakah ada data outlier menggunakan boxplot"""
 
 px = 1
 plt.figure(figsize=(20,20))
@@ -90,6 +114,8 @@ for i in ['Diabetes_binary', 'HighBP', 'HighChol', 'CholCheck', 'BMI', 'Smoker',
         plt.boxplot(df[i])
         plt.title(i)
         px=px+1
+
+"""menghapus value outlier """
 
 def outlier():
     l = [ 'HighBP', 'HighChol', 'CholCheck', 'BMI', 'Smoker',
@@ -104,6 +130,8 @@ def outlier():
         upf = x[1]+1.5*iqr   
         df[i] = np.where(df[i]>upf,upf,(np.where(df[i]<lof,lof,df[i])))
 outlier()
+
+"""melakukan cek kembali pada data set apakah ada data outlier menggunakan boxplot"""
 
 px = 1
 plt.figure(figsize=(20,20))
@@ -129,7 +157,10 @@ disini saya akan melakukan Data preperation sehingga data tersebut dapat di trai
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MaxAbsScaler
 
-"""## Normalize"""
+"""## Normalize
+
+mem Standardisasi sehingga menghasilkan distribusi dengan nilai standar deviasi 1 dan mean 0. Hal tersebut dilakukan dengan tujuan untuk meningkatkan peforma algoritma machine learning dan membuatnya konvergen lebih cepat selain itu menghindari overfitting dan juga data imbalance.
+"""
 
 abs_scaler = MaxAbsScaler()
 abs_scaler.fit(df)
@@ -137,18 +168,27 @@ scaled_data = abs_scaler.transform(df)
 df_scaled = pd.DataFrame(scaled_data, columns = df.columns)
 df_scaled.describe()
 
+"""membuat variable y dan x untuk kita pecah kembali kedalam var train dan test"""
+
 y = df_scaled['Diabetes_binary']
 X = df_scaled.drop(columns=['Diabetes_binary'])
 X
 
+"""mengecek value pada variable y"""
+
 y.value_counts()
+
+"""membagi data kedalam train dan test dengan ukuran 80:20"""
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=93)
 
-"""#Model Development dan Evaluasi Model"""
+"""#Model Development dan Evaluasi Model
+
+melakukan import model lib yang akan digunakan
+"""
 
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import mean_squared_error, accuracy_score,r2_score
+from sklearn.metrics import mean_squared_error, accuracy_score,r2_score, ConfusionMatrixDisplay
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB
@@ -162,6 +202,10 @@ print('rmse:',np.sqrt(mean_squared_error(y_test,y_pred)))
 print('r^2:',r2_score(y_test,y_pred))
 print('accuracy score:',accuracy_score(y_test, y_pred))
 
+"""ConfusionMatrixDisplay pada logisticRegressionModel"""
+
+ConfusionMatrixDisplay.from_predictions(y_test, y_pred)
+
 """DecisionTreeClassifier"""
 
 treeModel = DecisionTreeClassifier(min_samples_split = 60).fit(X_train, y_train)
@@ -170,6 +214,10 @@ print('mse:',mean_squared_error(y_test,y_pred_tree))
 print('rmse:',np.sqrt(mean_squared_error(y_test,y_pred_tree)))
 print('r^2:',r2_score(y_test,y_pred_tree))
 print('accuracy score:',accuracy_score(y_test, y_pred_tree))
+
+"""ConfusionMatrixDisplay pada DecisionTreeClassifier"""
+
+ConfusionMatrixDisplay.from_predictions(y_test, y_pred_tree)
 
 """RandomForestClassifier"""
 
@@ -180,6 +228,10 @@ print('rmse:',np.sqrt(mean_squared_error(y_test,y_pred_forest)))
 print('r^2:',r2_score(y_test,y_pred_forest))
 print('accuracy score:',accuracy_score(y_test, y_pred_forest))
 
+"""ConfusionMatrixDisplay pada RandomForestClassifier"""
+
+ConfusionMatrixDisplay.from_predictions(y_test, y_pred_forest)
+
 bayesModel = GaussianNB().fit(X_train, y_train)
 y_pred_bayes = bayesModel.predict(X_test)
 print('mse:',mean_squared_error(y_test,y_pred_bayes))
@@ -187,4 +239,6 @@ print('rmse:',np.sqrt(mean_squared_error(y_test,y_pred_bayes)))
 print('r^2:',r2_score(y_test,y_pred_bayes))
 print('accuracy score:',accuracy_score(y_test, y_pred_bayes))
 
-"""dari hasil yang didapat dengan dataset yang sudah saya bersihkan paling baik menggunakan RandomForestClassifier dengan score 0.8646128981393882"""
+"""ConfusionMatrixDisplay pada GaussianNB"""
+
+ConfusionMatrixDisplay.from_predictions(y_test, y_pred_bayes)
