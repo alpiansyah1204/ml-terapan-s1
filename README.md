@@ -142,14 +142,29 @@ lalu dalam menganalisa evaluasi saya menggunakan ConfusionMatrixDisplay untuk me
 
 ConfusionMatrixDisplay sendiri yaitu representasi matriks NxN dari label yang diprediksi dan aktual, di mana N adalah jumlah kelas yang harus diklasifikasi oleh model klasifikasi. Dalam matriks ini, kita dapat melihat jumlah nilai prediksi dan nilai aktual terhadap satu sama lain secara grafis. Ini memberi kita cara yang sangat jelas untuk menganalisis seberapa baik model kita mengklasifikasikan label individu dan kita juga dapat melihat label apa yang tidak diklasifikasikan oleh model kita dengan benar. Perhatikan gambar di bawah ini dari matriks konfusi dari klasifikasi biner
 
+pada matrik ini dibagi menjadi 4 
+- truelabel(1),predictlabel(1) = Jika nilai aktualnya positif dan nilai prediksinya juga positif, maka disebut True Positive
+- truelabel(1),predictlabel(0) = Jika nilai sebenarnya positif dan nilai prediksi negatif, maka disebut Negatif Palsu
+- truelabel(0),predictlabel(1) = Jika nilai aktual negatif dan nilai prediksi positif, maka disebut Positif Palsu
+- truelabel(0),predictlabel(0) = Jika nilai aktual negatif dan nilai prediksi juga negatif, maka disebut True Negative
+
+
+hasil ConfusionMatrixDisplay pada setiap model 
 
 - LogisticRegression
+- 
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/log_cm.png?raw=True)
+
 - DecisionTreeClassifier
+- 
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/dect_cm.png?raw=True)
+
 - RandomForestClassifier
+- 
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/rf_cm.png?raw=True)
+
 - GaussianNB
+- 
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/gd_cm.png?raw=True)
 
 didapatkan hasil bahwa RandomForestClassifier memiliki score terbaik pada dataset yang kita miliki
