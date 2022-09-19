@@ -53,6 +53,5 @@ Variabel - variabel yang terdapat di Dataset :
 - Income: Income scale (INCOME2 see codebook) scale 1-8 1 = less than $10,000 5 = less than $35,000 8 = $75,000 or more
  
  Data Loading
- |model           |year|price|transmission|mileage|fuelType|tax|mpg  |engineSize|
-|----------------|----|-----|------------|-------|--------|---|-----|----------|
+|Diabetes_binary|HighBP|HighChol|CholCheck|BMI|Smoker|Stroke|HeartDiseaseorAttack|PhysActivity|Fruits|...|AnyHealthcare|NoDocbcCost|GenHlth|MentHlth|PhysHlth|DiffWalk|Sex|Age|Education|Income|
  
