@@ -152,19 +152,20 @@ pada matrik ini dibagi menjadi 4
 hasil ConfusionMatrixDisplay pada setiap model 
 
 - LogisticRegression
-- 
+
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/log_cm.png?raw=True)
 
 - DecisionTreeClassifier
-- 
+
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/dect_cm.png?raw=True)
 
 - RandomForestClassifier
-- 
+
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/rf_cm.png?raw=True)
 
 - GaussianNB
-- 
+
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/gd_cm.png?raw=True)
 
-didapatkan hasil bahwa RandomForestClassifier memiliki score terbaik pada dataset yang kita miliki
+
+konklusi yang didapat dari percobaan proyek kali ini yaitu kita mendapatkan bahwa RandomForestClassifier memiliki score terbaik pada dataset yang kita miliki yaitu score yang didapat 0.8646128981393882 
