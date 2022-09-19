@@ -128,6 +128,9 @@ dari model yang akan digunakan menurut saya RandomForestClassifier akan menghasi
 
 
 ## Evaluasi 
+
+dari model yang sudah dijalankan didapatkan hasil seperti berikut 
+
 |no|Model	|Score|mse|rmse|
 |:---:|:---------------------------------:|:---------------:|:-----------------:|:-----------------:|
 |0 |LogisticRegression |0.8629178492589089|0.13708215074109115|0.37024606782664304|
@@ -135,5 +138,18 @@ dari model yang akan digunakan menurut saya RandomForestClassifier akan menghasi
 |2 |RandomForestClassifier |0.8646128981393882|0.13538710186061179|0.3679498632430943|
 |3 |GaussianNB |0.818137023021129|0.18186297697887102|0.42645395645822193|
 
+lalu dalam menganalisa evaluasi saya menggunakan ConfusionMatrixDisplay untuk melihat hasil dari prediksi dari model yang sudah dibuat 
+
+ConfusionMatrixDisplay sendiri yaitu representasi matriks NxN dari label yang diprediksi dan aktual, di mana N adalah jumlah kelas yang harus diklasifikasi oleh model klasifikasi. Dalam matriks ini, kita dapat melihat jumlah nilai prediksi dan nilai aktual terhadap satu sama lain secara grafis. Ini memberi kita cara yang sangat jelas untuk menganalisis seberapa baik model kita mengklasifikasikan label individu dan kita juga dapat melihat label apa yang tidak diklasifikasikan oleh model kita dengan benar. Perhatikan gambar di bawah ini dari matriks konfusi dari klasifikasi biner
+
+
+- LogisticRegression
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/log_cm.png?raw=True)
+- DecisionTreeClassifier
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/dect_cm.png?raw=True)
+- RandomForestClassifier
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/rf_cm.png?raw=True)
+- GaussianNB
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/gd_cm.png?raw=True)
 
 didapatkan hasil bahwa RandomForestClassifier memiliki score terbaik pada dataset yang kita miliki
