@@ -92,3 +92,18 @@ Proses splitting data atau pembagian dataset menjadi data latih (train) dan data
 Data numerik yang terdapat di dataset perlu dilakukannya proses Standardisasi sehingga menghasilkan distribusi dengan nilai standar deviasi 1 dan mean 0. Hal tersebut dilakukan dengan tujuan untuk meningkatkan peforma algoritma machine learning dan membuatnya konvergen lebih cepat selain itu menghindari overfitting dan juga data imbalance.
 
 ## Modeling
+pada proyek kali ini 
+-pada proyek yang dibuat kali ini, digunakan model algoritma mechine learning yaitu Machine Learning yaitu LogisticRegression, DecisionTreeClassifier, RandomForestClassifier, GaussianNB. model tersebut dipilih karena tujuanya ingin memprediksi binary classification. hasil dari model yang kita buat akan dibandingkan berdasarkan variable yang telah terpilih yaitu Diabetes_binary
+
+ddari algoritma diatas pada saat proses modeling dan evaluasi semua algoritma yang digunakan bekerja dengan cukup baik dalam hal memprediksi diabetes. hal ini dapat ditunjukan nilai akurasi, MSE, dan RMSE pada saat training dan testing. namun pada akhirnya score yang paling tinggi yaitu ketika menggunakan algoritma RandomForestClassifier
+
+## Evaluasi 
+|no|Model	|Score|mse|rmse|
+|:---:|:---------------------------------:|:---------------:|:-----------------:|:-----------------:|
+|0 |LogisticRegression |0.8629178492589089|0.13708215074109115|0.37024606782664304|
+|1 |DecisionTreeClassifier |0.8581480605487228|0.1418519394512772|0.37663236644143744|
+|2 |RandomForestClassifier |0.8646128981393882|0.13538710186061179|0.3679498632430943|
+|3 |GaussianNB |0.818137023021129|0.18186297697887102|0.42645395645822193|
+
+
+didapatkan hasil bahwa RandomForestClassifier memiliki score terbaik pada dataset yang kita miliki
