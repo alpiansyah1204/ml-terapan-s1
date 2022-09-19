@@ -81,7 +81,12 @@ setelah itu kita melihat korelasi pada setiap variable yang ada didalam data set
 
 selain itu juga kita mengecek untuk apakah ada data outlier 
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/before%20boxplot.png?raw=True)
-pada data ini menghapus dengan rumus 
+
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/outlier.jpeg?raw=True)
+
+bisa dilihat dari gambar di atas data yang dipakai harus ada diantara -1.5(Q3-Q1) dan 1.5(Q3-Q1) atau bisa ditulis 
+-1.5(Q3-Q1)<data<1.5(Q3-Q1)
+
 setelah data outlier dibersihkan 
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/after%20boxplot.png?raw=True)
 
@@ -89,16 +94,19 @@ setelah data outlier dibersihkan
 Sebelum datasetnya di latih atau training, dari model sebelumnya perlu melakukan encoding lalu pemisahan data antara data latih dan test setelah itu melakukan scaling untuk data categorical agar data dapat dilatih.
 
 #### Train-Test Split
-Proses splitting data atau pembagian dataset menjadi data latih (train) dan data uji (test) merupakan hal yang harus dilakukan sebelum melakukan pemodelan supervised. Hal ini karena data uji berperan sebagai data baru yang benar-benar belum pernah dilihat oleh model sebelumnya sehingga informasi yang terdapat pada data uji tidak mengotori informasi yang terdapat pada data latih, alasan lain mengapa menggunakan train test split karena untuk efisiensi dan tidak melakukan data leakage ketika melakukan scaling. 
+Proses splitting data atau pembagian dataset menjadi data latih (train) dan data uji (test) merupakan hal yang harus dilakukan sebelum melakukan pemodelan supervised. Hal ini karena data uji berperan sebagai data baru yang benar-benar belum pernah dilihat oleh model sebelumnya sehingga informasi yang terdapat pada data uji tidak mengotori informasi yang terdapat pada data latih, alasan lain mengapa menggunakan train test split karena untuk efisiensi dan tidak melakukan data leakage ketika melakukan scaling. pada proyek kali ini kita membagi data menjadi 80:20 dengan random state = 93 
 
 #### Standardisasi 
-Data numerik yang terdapat di dataset perlu dilakukannya proses Standardisasi sehingga menghasilkan distribusi dengan nilai standar deviasi 1 dan mean 0. Hal tersebut dilakukan dengan tujuan untuk meningkatkan peforma algoritma machine learning dan membuatnya konvergen lebih cepat selain itu menghindari overfitting dan juga data imbalance.
+Data numerik yang terdapat di dataset perlu dilakukannya proses Standardisasi sehingga menghasilkan distribusi dengan nilai standar deviasi 1 dan mean 0. Hal tersebut dilakukan dengan tujuan untuk meningkatkan peforma algoritma machine learning dan membuatnya konvergen lebih cepat selain itu menghindari overfitting dan juga data imbalance. pada proyek kali ini saya menggunakan fungsi MaxAbsScaler(). fungsi ini berguna untuk melakukan standarisasi pada data. 
 
 ## Modeling
-pada proyek kali ini 
--pada proyek yang dibuat kali ini, digunakan model algoritma mechine learning yaitu Machine Learning yaitu LogisticRegression, DecisionTreeClassifier, RandomForestClassifier, GaussianNB. model tersebut dipilih karena tujuanya ingin memprediksi binary classification. hasil dari model yang kita buat akan dibandingkan berdasarkan variable yang telah terpilih yaitu Diabetes_binary
 
-ddari algoritma diatas pada saat proses modeling dan evaluasi semua algoritma yang digunakan bekerja dengan cukup baik dalam hal memprediksi diabetes. hal ini dapat ditunjukan nilai akurasi, MSE, dan RMSE pada saat training dan testing. namun pada akhirnya score yang paling tinggi yaitu ketika menggunakan algoritma RandomForestClassifier
+pada proyek yang dibuat kali ini, digunakan model algoritma mechine learning yaitu Machine Learning yaitu LogisticRegression, DecisionTreeClassifier, RandomForestClassifier, GaussianNB. model tersebut dipilih karena tujuanya ingin memprediksi binary classification. hasil dari model yang kita buat akan dibandingkan berdasarkan variable yang telah terpilih yaitu Diabetes_binary
+
+- pada LogisticRegression kita hanya menggunakan fungsi fit tanpa tambahan parameterlain 
+`logisticRegressionModel = LogisticRegression().fit(X_train, y_train)`
+
+dari algoritma diatas pada saat proses modeling dan evaluasi semua algoritma yang digunakan bekerja dengan cukup baik dalam hal memprediksi diabetes. hal ini dapat ditunjukan nilai akurasi, MSE, dan RMSE pada saat training dan testing. namun pada akhirnya score yang paling tinggi yaitu ketika menggunakan algoritma RandomForestClassifier
 
 ## Evaluasi 
 |no|Model	|Score|mse|rmse|
