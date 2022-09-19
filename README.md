@@ -4,7 +4,7 @@
 ## Domain Proyek
 Project Machine Learning Terapan : membuat model Predictive Analysis, menggunakan dataset yang berdomain kesehatan mengenai diabetes.
 ### Latar Belakang
-Ketika glukosa darah Anda, umumnya dikenal sebagai gula darah, terlalu tinggi, Anda mengembangkan diabetes. Sumber energi utama Anda, glukosa darah, diperoleh dari makanan yang Anda makan. Glukosa dari makanan diangkut ke dalam sel Anda oleh hormon insulin, yang diproduksi oleh pankreas. Tubuh Anda kadang-kadang menghasilkan insulin yang tidak mencukupi atau tidak ada sama sekali, atau menggunakan insulin dengan buruk. Setelah itu, glukosa tetap berada dalam sirkulasi Anda dan tidak masuk ke dalam sel Anda.
+Diabetes terjadi ketika glukosa darah Anda, umumnya dikenal sebagai gula darah, terlalu tinggi, Anda mengembangkan diabetes. Sumber energi utama Anda, glukosa darah, diperoleh dari makanan yang Anda makan. Glukosa dari makanan diangkut ke dalam sel Anda oleh hormon insulin, yang diproduksi oleh pankreas. Tubuh Anda kadang-kadang menghasilkan insulin yang tidak mencukupi atau tidak ada sama sekali, atau menggunakan insulin dengan buruk. Setelah itu, glukosa tetap berada dalam sirkulasi Anda dan tidak masuk ke dalam sel Anda.
 Seiring waktu, memiliki terlalu banyak glukosa dalam darah Anda dapat menyebabkan masalah kesehatan. Meskipun tidak ada obat untuk diabetes, ada beberapa hal yang dapat Anda lakukan untuk mengelolanya dan tetap sehat.
 
 Diabetes kadang-kadang disebut sebagai "diabetes ambang" atau "sentuhan gula." Ungkapan ini menyiratkan bahwa seseorang tidak benar-benar menderita diabetes atau memiliki kasus yang lebih ringan, namun diabetes selalu memiliki konsekuensi yang menghancurkan.
@@ -53,7 +53,42 @@ Variabel - variabel yang terdapat di Dataset :
 - Income: Income scale (INCOME2 see codebook) scale 1-8 1 = less than $10,000 5 = less than $35,000 8 = $75,000 or more
  
 Data Visualisasi
+hal pertama yang kita lihat yaitu berapa banyak jumlah yang terkena diabetes 
+|count|No diabetes|diabetes|
+|:---:|:---------:|:------:|
+|100%  |86.07% |13.93%|
+
+
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/piechart.png?raw=True)
 
 melihat distribusi variable yang ada dalam data set
 
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/distribusi.png?raw=True)
+
+
+Pair Plot disini saya menggunakan pairplot untuk melihat grafik mana yang memiliki kesamaan sehingga akan mempermudah untuk melakukan prediksi
+
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/pairplot.png?raw=True)
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/pairplot1.png?raw=True)
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/pairplot2.png?raw=True)
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/pairplot3.png?raw=True)
+
+setelah itu kita melihat korelasi pada setiap variable yang ada didalam data set 
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/korelasi.png?raw=True)
+
+selain itu juga kita mengecek untuk apakah ada data outlier 
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/before%20boxplot.png?raw=True)
+
+setelah data outlier dibersihkan 
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/after%20boxplot.png?raw=True)
+
+## Data Preparation
+Sebelum datasetnya di latih atau training, dari model sebelumnya perlu melakukan encoding lalu pemisahan data antara data latih dan test setelah itu melakukan scaling untuk data categorical agar data dapat dilatih.
+
+#### Train-Test Split
+Proses splitting data atau pembagian dataset menjadi data latih (train) dan data uji (test) merupakan hal yang harus dilakukan sebelum melakukan pemodelan supervised. Hal ini karena data uji berperan sebagai data baru yang benar-benar belum pernah dilihat oleh model sebelumnya sehingga informasi yang terdapat pada data uji tidak mengotori informasi yang terdapat pada data latih, alasan lain mengapa menggunakan train test split karena untuk efisiensi dan tidak melakukan data leakage ketika melakukan scaling. 
+
+#### Standardisasi 
+Data numerik yang terdapat di dataset perlu dilakukannya proses Standardisasi sehingga menghasilkan distribusi dengan nilai standar deviasi 1 dan mean 0. Hal tersebut dilakukan dengan tujuan untuk meningkatkan peforma algoritma machine learning dan membuatnya konvergen lebih cepat selain itu menghindari overfitting dan juga data imbalance.
+
+## Modeling
