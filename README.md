@@ -52,6 +52,8 @@ Variabel - variabel yang terdapat di Dataset :
 - Education: Education level (EDUCA see codebook) scale 1-6 1 = Never attended school or only kindergarten 2 = elementary etc.
 - Income: Income scale (INCOME2 see codebook) scale 1-8 1 = less than $10,000 5 = less than $35,000 8 = $75,000 or more
  
- Data Loading
-|Diabetes_binary|HighBP|HighChol|CholCheck|BMI|Smoker|Stroke|HeartDiseaseorAttack|PhysActivity|Fruits|...|AnyHealthcare|NoDocbcCost|GenHlth|MentHlth|PhysHlth|DiffWalk|Sex|Age|Education|Income|
- 
+Data Visualisasi
+
+melihat distribusi variable yang ada dalam data set
+
+![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/korelasi.png?raw=True)
