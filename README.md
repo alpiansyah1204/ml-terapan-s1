@@ -8,6 +8,9 @@ Diabetes terjadi ketika glukosa darah Anda, umumnya dikenal sebagai gula darah, 
 Seiring waktu, memiliki terlalu banyak glukosa dalam darah Anda dapat menyebabkan masalah kesehatan. Meskipun tidak ada obat untuk diabetes, ada beberapa hal yang dapat Anda lakukan untuk mengelolanya dan tetap sehat.
 
 Diabetes kadang-kadang disebut sebagai "diabetes ambang" atau "sentuhan gula." Ungkapan ini menyiratkan bahwa seseorang tidak benar-benar menderita diabetes atau memiliki kasus yang lebih ringan, namun diabetes selalu memiliki konsekuensi yang menghancurkan.
+
+Referensi: [Epidemiology of Diabetes and Diabetes-Related Complications](https://academic.oup.com/ptj/article/88/11/1254/2858146)
+
 ## Business Understanding
 ### Problem Statements
 - Variable apa saja yang berpengaruh pada diagnosa diabetes seseorang ?
@@ -78,7 +81,7 @@ setelah itu kita melihat korelasi pada setiap variable yang ada didalam data set
 
 selain itu juga kita mengecek untuk apakah ada data outlier 
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/before%20boxplot.png?raw=True)
-
+pada data ini menghapus dengan rumus 
 setelah data outlier dibersihkan 
 ![MSE](https://github.com/alpiansyah1204/ml-terapan-s1/blob/main/image/after%20boxplot.png?raw=True)
 
