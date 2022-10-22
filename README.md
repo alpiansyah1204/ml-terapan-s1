@@ -1,5 +1,4 @@
-# Machine-Learning-Terapan
-# Laporan Proyek Machine Learning - Rizqi Alpiansyah
+# achine Learning - Rizqi Alpiansyah
 
 ## Domain Proyek
 Project Machine Learning Terapan : membuat model Predictive Analysis, menggunakan dataset yang berdomain kesehatan mengenai diabetes.
